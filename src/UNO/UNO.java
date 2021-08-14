@@ -1,10 +1,8 @@
 package UNO;
 
 import com.company.Deck;
+import Game.Game;
 import com.company.Player;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <h1>UNO</h1>
@@ -18,15 +16,14 @@ import java.util.List;
  * @version 13/8/2021
  */
 
-public class UNO {
+public class UNO extends Game {
     protected Deck deck = new Deck();
-    protected List<Player> players = new ArrayList<>();
 
     public UNO(){
         createUNOCardDeck();
     }
 
-    private void createUNOCardDeck(){
+    private void createUNOCardDeck(){ // FIXME: 8/13/2021 lol
         for(String color : UNOCard.COLORS){
             for(String value : UNOCard.VALUES){
 
@@ -34,9 +31,25 @@ public class UNO {
         }
     }
 
+
+
+    @Override
     public void play(){
 
     }
 
+    @Override
+    protected void round() {
 
+    }
+
+    @Override
+    protected void turn(Player activePlayer) {
+
+    }
+
+    @Override
+    protected void displayResults() {
+
+    }
 }
