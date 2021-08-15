@@ -1,7 +1,5 @@
 package com.company;
 
-import UNO.UNOCard;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,5 +28,13 @@ public class Hand {
 
     public void removeCard(Card card){
         cards.remove(card);
+    }
+
+    public void sortBySuit(){
+        cards.sort(new Card.SortBySuit());
+    }
+
+    public void sortByValue(){
+        cards.sort(new Card.SortByValue());
     }
 }
