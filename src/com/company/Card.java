@@ -29,7 +29,7 @@ public class Card {
     protected static class SortByValue implements Comparator<Card> {
         @Override
         public int compare(Card cardA, Card cardB){
-            return cardA.value - cardB.value;
+            return cardA.value.compareTo(cardB.value);
         }
     }
 
