@@ -28,4 +28,12 @@ public abstract class Card {
             return cardA.value - cardB.value;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "suit='" + suit + '\'' +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }
