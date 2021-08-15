@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @since 13/8/2021
  * @author John
- * @version 14/8/2021
+ * @version 15/8/2021
  */
 
 public abstract class Game {
