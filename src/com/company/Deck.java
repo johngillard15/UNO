@@ -10,6 +10,18 @@ public class Deck {
 
     }
 
+    public void shuffle(){
+        Collections.shuffle(pile);
+    }
+
+    public Card deal(){
+        return pile.remove(0);
+    }
+
+    public void discard(Card card){
+        pile.add(card);
+    }
+
     @Override
     public String toString() {
         return "Deck{" +
