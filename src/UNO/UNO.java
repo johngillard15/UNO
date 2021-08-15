@@ -58,6 +58,8 @@ public class UNO extends Game {
             deck.pile.add(new UNOCard("WILD", "COLOR_CHANGE"));
             deck.pile.add(new UNOCard("WILD", "DRAW_FOUR"));
         }
+
+        deck.shuffle();
     }
 
     private void dealStartingHands(){
