@@ -1,6 +1,6 @@
 package com.UNO;
 
-import com.company.Card;
+import com.Card.Card;
 
 public class UNOCard extends Card {
     protected static final String[] COLORS = {"RED", "GREEN", "BLUE", "YELLOW", "WILD"};

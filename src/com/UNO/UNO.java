@@ -1,10 +1,10 @@
 package com.UNO;
 
 import com.Utilities.CLI;
-import com.company.Card;
-import com.company.Deck;
+import com.Card.Card;
+import com.Card.Deck;
 import com.Game.Game;
-import com.company.Player;
+import com.Player.Player;
 
 import java.util.ArrayList;
 import java.util.List;

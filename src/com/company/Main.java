@@ -1,8 +1,7 @@
 package com.company;
 
-import UNO.UNO;
-
-import com.company.CardGUI;
+import com.Card.CardGUI;
+import com.UNO.UNO;
 
 public class Main {
     public static void main(String[] args) {
