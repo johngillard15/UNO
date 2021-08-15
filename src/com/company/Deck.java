@@ -9,4 +9,11 @@ public class Deck {
     public Deck(){
 
     }
+
+    @Override
+    public String toString() {
+        return "Deck{" +
+                "pile=" + pile +
+                '}';
+    }
 }
