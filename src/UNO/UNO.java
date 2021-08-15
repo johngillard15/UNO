@@ -30,10 +30,11 @@ public class UNO extends Game {
     protected void setup(int MIN_PLAYERS, int MAX_PLAYERS) {
         super.setup(MIN_PLAYERS, MAX_PLAYERS);
         createUNOCardDeck();
+        dealStartingHands();
     }
 
-    private void createUNOCardDeck(){ // FIXME: 8/13/2021 lol
-        // create 2 cards of a value for each color, excluding zero and wild cards
+    private void createUNOCardDeck(){
+        // create 2 cards of each value for each color, excluding zero and wild cards
         for(int i = 0; i < 2; i++){
             for(String color : UNOCard.COLORS){
                 if(color.equals("WILD")) break;
@@ -53,8 +54,13 @@ public class UNO extends Game {
             deck.pile.add(new UNOCard("WILD", "COLOR_CHANGE"));
             deck.pile.add(new UNOCard("WILD", "DRAW_FOUR"));
         }
+    }
 
-        System.out.println("deck.pile.size() : " + deck.pile.size());
+    private void dealStartingHands(){
+        for(Player player : players){
+            for(int i = 0; i < 7; i++)
+                draw(player);
+        }
     }
 
     private void draw(Player activePlayer){
