@@ -90,7 +90,13 @@ public class UNO extends Game {
         ranking.add(player);
     }
 
-    protected void displayResults() {
+    protected void displayResults(){
+        System.out.println("That's it for this game! here are the results:");
 
+        int rank = 1;
+        for(Player player : ranking)
+            System.out.printf("\t%d. %s\n", rank++, player.name);
+
+        System.out.printf("\nCongratulations to %s for winning the game!\n", ranking.get(0));
     }
 }
