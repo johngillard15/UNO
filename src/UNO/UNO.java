@@ -57,8 +57,12 @@ public class UNO extends Game {
         System.out.println("deck.pile.size() : " + deck.pile.size());
     }
 
-    public void draw(){
+    private void draw(Player activePlayer){
+        activePlayer.hand.addCard(deck.deal());
+    }
 
+    private void discard(Card card){
+        deck.discard(card);
     }
 
     public void play(){
