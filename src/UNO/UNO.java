@@ -5,6 +5,9 @@ import com.company.Deck;
 import Game.Game;
 import com.company.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <h1>UNO</h1>
  *
@@ -21,6 +24,7 @@ public class UNO extends Game {
     protected Deck deck = new Deck();
     private final int STARTING_CARDS = 7;
     private final int MIN_PLAYERS = 2;
+    List<Player> ranking = new ArrayList<>();
 
     public UNO(){
         setup(MIN_PLAYERS);
@@ -81,6 +85,9 @@ public class UNO extends Game {
 
     protected void turn(Player activePlayer) {
 
+    private void playerFinished(Player player){
+        players.remove(player);
+        ranking.add(player);
     }
 
     protected void displayResults() {
