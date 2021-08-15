@@ -4,9 +4,9 @@ import java.util.Comparator;
 
 public class Card {
     protected String suit;
-    protected int value;
+    protected String value;
 
-    public Card(String suit, int value){
+    public Card(String suit, String value){
         this.suit = suit;
         this.value = value;
     }
