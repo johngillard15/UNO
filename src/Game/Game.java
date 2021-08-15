@@ -18,6 +18,8 @@ import java.util.Scanner;
 public abstract class Game {
     protected static final Scanner scan = new Scanner(System.in);
     protected List<Player> players = new ArrayList<>();
+    private static final int MIN_PLAYERS = 1;
+    private static final int MAX_PLAYERS = -1;
 
     public Game(){
         setup();
@@ -37,10 +39,10 @@ public abstract class Game {
     }
 
     protected static int getPlayerCount(){
-        return getPlayerCount(1, -1);
+        return getPlayerCount(MIN_PLAYERS, MAX_PLAYERS);
     }
     protected static int getPlayerCount(final int MIN){
-        return getPlayerCount(MIN, -1);
+        return getPlayerCount(MIN, MAX_PLAYERS);
     }
     protected static int getPlayerCount(final int MIN, final int MAX){
         int numPlayers;
