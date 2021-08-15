@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.Comparator;
 
-public abstract class Card {
+public class Card {
     protected String suit;
     protected int value;
 
