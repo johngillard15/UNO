@@ -6,6 +6,17 @@ public class CardGUI {
     public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
     public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
     public static final String ANSI_RESET = "\u001B[0m";
+    public CardGUI(){
+
+    }
+
+    public static void showCard(Card card){
+
+    }
+
+    public static void showHand(List<Card> hand){
+
+    }
 
     public static void cardTest(){
         System.out.println(ANSI_BLUE_BACKGROUND + "Hello, World!" + ANSI_RESET);
