@@ -18,6 +18,7 @@ import com.company.Player;
 
 public class UNO extends Game {
     protected Deck deck = new Deck();
+    private int STARTING_CARDS = 7;
 
     public UNO(){
         createUNOCardDeck();
