@@ -11,6 +11,10 @@ public class Card {
         this.value = value;
     }
 
+    public static Card createCard(String suit, String value){
+        return new Card(suit, value);
+    }
+
     protected static class SortBySuit implements Comparator<Card> {
         @Override
         public int compare(Card cardA, Card cardB){
