@@ -83,6 +83,8 @@ public class UNO extends Game {
         CLI.pause();
 
         for(Player player : players){
+            System.out.println(player.name);
+            System.out.println(player.hand.cards);
             System.out.println("Sorted by Suit:");
             player.hand.sortBySuit();
             System.out.println(player.hand.cards);
