@@ -1,18 +1,16 @@
-package com.company;
+package com.Card;
 
 public class CardGUI {
-    public static void cardTest(){
-        final String ANSI_RED_BACKGROUND = "\u001B[41m";
-        final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
-        final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
-        final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
-        final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
+    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
+    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+    public static final String ANSI_RESET = "\u001B[0m";
 
+    public static void cardTest(){
         System.out.println(ANSI_BLUE_BACKGROUND + "Hello, World!" + ANSI_RESET);
 
-        String NINE = "9";
-        String NINE_LINE = "̲9"; // has a "combining low line" or "non-spacing underscore"
-        String NINE_DOWN = "6";
+        String TWO = "2";
         System.out.printf(
                 """
                         ╭─────────╮
@@ -22,7 +20,7 @@ public class CardGUI {
                         │         │
                         │        %s│
                         ╰─────────╯
-                        """, NINE, NINE_LINE, NINE_DOWN);
+                        """, TWO, TWO, TWO);
 
         String SIX = "6";
         String SIX_LINE = "̲6";
@@ -38,7 +36,9 @@ public class CardGUI {
                         ╰─────────╯
                         """, SIX, SIX_LINE, SIX_DOWN);
 
-        String TWO = "2";
+        String NINE = "9";
+        String NINE_LINE = "̲9"; // has a "combining low line" or "non-spacing underscore"
+        String NINE_DOWN = "6";
         System.out.printf(
                 """
                         ╭─────────╮
@@ -48,7 +48,7 @@ public class CardGUI {
                         │         │
                         │        %s│
                         ╰─────────╯
-                        """, TWO, TWO, TWO);
+                        """, NINE, NINE_LINE, NINE_DOWN);
 
         String SKIP = " ⃠"; // uses a thin space
         System.out.printf(
