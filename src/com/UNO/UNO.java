@@ -93,6 +93,7 @@ public class UNO extends Game {
             System.out.println(player.hand.cards);
         }
 
+        // TODO: remember to grab the last player and add them to the rankings before the game ends
 //        do{
 //            round();
 //        }while(players.size() > 1);
