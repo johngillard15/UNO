@@ -28,8 +28,10 @@ public abstract class Game {
         setup(MIN, MAX_PLAYERS);
     }
     protected void setup(int MIN_PLAYERS, int MAX_PLAYERS){
-        int numPlayers = getPlayerCount(MIN_PLAYERS, MAX_PLAYERS);
+        addPlayers(getPlayerCount(MIN_PLAYERS, MAX_PLAYERS));
+    }
 
+    protected void addPlayers(int numPlayers){
         do{
             System.out.printf("\nPlayer %d, what is your name? ", players.size() + 1);
             String name = scan.nextLine().trim();
