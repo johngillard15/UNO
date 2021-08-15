@@ -6,6 +6,8 @@ public class CardGUI {
     public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
     public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
     public static final String ANSI_RESET = "\u001B[0m";
+    public static List<String> cards = new ArrayList<>();
+
     public CardGUI(){
 
     }
