@@ -1,4 +1,6 @@
-package com.company;
+package com.Player;
+
+import com.Card.Card;
 
 import java.util.ArrayList;
 import java.util.List;
