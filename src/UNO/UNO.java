@@ -93,10 +93,11 @@ public class UNO extends Game {
     protected void displayResults(){
         System.out.println("That's it for this game! here are the results:");
 
-        int rank = 1;
+        int rank = 0;
         for(Player player : ranking)
-            System.out.printf("\t%d. %s\n", rank++, player.name);
+            System.out.printf("\t%d. %s\n", ++rank, player.name);
 
-        System.out.printf("\nCongratulations to %s for winning the game!\n", ranking.get(0));
+        System.out.printf("\nCongratulations to %s for winning the game! You are an UNO master!!!!1111!!1!!!\n",
+                ranking.get(0));
     }
 }
