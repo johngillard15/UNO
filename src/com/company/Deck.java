@@ -1,10 +1,10 @@
 package com.company;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.*;
 
 public class Deck {
-    Deque<Card> pile = new ArrayDeque<>();
+    //public Deque<Card> pile = new ArrayDeque<>();
+    public List<Card> pile = new ArrayList<>();
 
     public Deck(){
 
