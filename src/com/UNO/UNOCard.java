@@ -1,4 +1,4 @@
-package UNO;
+package com.UNO;
 
 import com.company.Card;
 

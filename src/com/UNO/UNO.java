@@ -1,18 +1,18 @@
-package UNO;
+package com.UNO;
 
-import Utilities.CLI;
+import com.Utilities.CLI;
 import com.company.Card;
 import com.company.Deck;
-import Game.Game;
+import com.Game.Game;
 import com.company.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <h1>UNO</h1>
+ * <h1>com.UNO</h1>
  *
- * <p>My UNO card game</p>
+ * <p>My com.UNO card game</p>
  *
  * <br>
  *
@@ -79,7 +79,7 @@ public class UNO extends Game {
     }
 
     public void play(){
-        System.out.println("\n--- Welcome to UNO! Have fun! ---");
+        System.out.println("\n--- Welcome to com.UNO! Have fun! ---");
         CLI.pause();
 
         for(Player player : players){
@@ -119,7 +119,7 @@ public class UNO extends Game {
         for(Player player : ranking)
             System.out.printf("\t%d. %s\n", ++rank, player.name);
 
-        System.out.printf("\nCongratulations to %s for winning the game! You are an UNO master!!!!1111!!1!!!\n",
+        System.out.printf("\nCongratulations to %s for winning the game! You are an com.UNO master!!!!1111!!1!!!\n",
                 ranking.get(0));
     }
 }
