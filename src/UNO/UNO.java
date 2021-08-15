@@ -1,5 +1,6 @@
 package UNO;
 
+import Utilities.CLI;
 import com.company.Card;
 import com.company.Deck;
 import Game.Game;
@@ -78,14 +79,31 @@ public class UNO extends Game {
     }
 
     public void play(){
-        System.out.println(deck);
+        System.out.println("\n--- Welcome to UNO! Have fun! ---");
+        CLI.pause();
+
+        for(Player player : players){
+            System.out.println("Sorted by Suit:");
+            player.hand.sortBySuit();
+            System.out.println(player.hand.cards);
+            System.out.println("Sorted by Value:");
+            player.hand.sortByValue();
+            System.out.println(player.hand.cards);
+        }
+
+//        do{
+//            round();
+//        }while(players.size() > 1);
+//        displayResults();
     }
 
-    protected void round() {
+    protected void round(){
 
     }
 
-    protected void turn(Player activePlayer) {
+    protected void turn(Player activePlayer){
+
+    }
 
     private void playerFinished(Player player){
         players.remove(player);
