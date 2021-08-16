@@ -17,48 +17,53 @@ public class UnoCardGUI {
     public static String getColorCard(String color, String value){
         String ANSI_COLOR = getAnsiCode(color);
 
-        String TOP_CORRECTOR = "";
-        String MIDDLE;
-        String MID_CORRECTOR;
-        String BOT_CORRECTOR = "";
+        String face = value;
+        String topCorrector = "";
+        String middle;
+        String midCorrector;
+        String botCorrector = "";
 
         // each face needs different formatting to fit within the bounds of the card
         switch(value){
             case "SKIP" -> { // ⃠
-                value = " ⃠ ";
-                MIDDLE = "  " + value;
-                MID_CORRECTOR = "  ";
+                face = " ⃠ ";
+                middle = "  " + face;
+                midCorrector = "  ";
             }
             case "REVERSE" -> { // 🔁
-                value = "\uD83D\uDD01" + " ";
-                MIDDLE = "   " + value;
-                MID_CORRECTOR = " ";
+                face = "\uD83D\uDD01" + " ";
+                middle = "   " + face;
+                midCorrector = " ";
             }
             case "DRAW_TWO" -> {
-                value = "+2";
-                MIDDLE = "▮";
-                MID_CORRECTOR = "▮  ";
+                face = "+2";
+                middle = "▮▮";
+                midCorrector = "  ";
             }
             default -> {
                 if (value.equals("6") || value.equals("9"))
-                    MIDDLE = " ̲" + value;
+                    middle = " ̲" + face;
                 else
-                    MIDDLE = " " + value;
-                TOP_CORRECTOR = " ";
-                MID_CORRECTOR = "  ";
-                BOT_CORRECTOR = " ";
+                    middle = " " + face;
+                topCorrector = " ";
+                midCorrector = "  ";
+                botCorrector = " ";
             }
         }
 
+        String top = face + topCorrector;
+        String mid = middle + midCorrector;
+        String bot = botCorrector + face;
+
         String cardFace = String.format(
                 ANSI_COLOR + "╭─────────╮\n" + ANSI.RESET +
-                ANSI_COLOR + "│%s%s       │\n" + ANSI.RESET +
+                ANSI_COLOR + "│%s       │\n" + ANSI.RESET +
                 ANSI_COLOR + "│         │\n" + ANSI.RESET +
-                ANSI_COLOR + "│   %s%s  │\n" + ANSI.RESET +
+                ANSI_COLOR + "│   %s  │\n" + ANSI.RESET +
                 ANSI_COLOR + "│         │\n" + ANSI.RESET +
-                ANSI_COLOR + "│       %s%s│\n" + ANSI.RESET +
+                ANSI_COLOR + "│       %s│\n" + ANSI.RESET +
                 ANSI_COLOR + "╰─────────╯" + ANSI.RESET,
-                value, TOP_CORRECTOR, MIDDLE, MID_CORRECTOR, BOT_CORRECTOR, value);
+                top, mid, bot);
 
         return cardFace;
     }
