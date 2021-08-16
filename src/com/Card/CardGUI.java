@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class CardGUI {
     private static String getCard(Card card){
         if(card.suit.equals("WILD"))
-            return UnoCardGUI.getWildCard(card.suit);
+            return UnoCardGUI.getWildCard(card.value);
         else
             return UnoCardGUI.getColorCard(card.suit, card.value);
 
