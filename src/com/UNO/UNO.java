@@ -1,7 +1,6 @@
 package com.UNO;
 
 import com.Card.CardGUI;
-import com.Card.UnoCardGUI;
 import com.Utilities.ANSI;
 import com.Utilities.CLI;
 import com.Card.Card;
@@ -14,15 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <h1>com.UNO</h1>
+ * <h1>UNO</h1>
  *
- * <p>My com.UNO card game</p>
+ * <p>My UNO card game</p>
  *
  * <br>
  *
  * @since 13/8/2021
  * @author John Gillard
- * @version 15/8/2021
+ * @version 16/8/2021
  */
 
 // TODO: handle skips, reverse, draws, wilds
@@ -36,6 +35,7 @@ public class UNO extends Game {
     private final int MIN_PLAYERS = 2;
     List<Player> ranking = new ArrayList<>();
     private Card currentCard;
+    private String newColor = "";
 
     public UNO(){
         setup(MIN_PLAYERS);
@@ -73,6 +73,14 @@ public class UNO extends Game {
         deck.shuffle();
 
         currentCard = deck.deal();
+        if(currentCard.suit.equals("WILD")){
+            do{
+                discard(currentCard);
+                currentCard = deck.deal();
+            }while(!currentCard.suit.equals("WILD"));
+        }
+
+        newColor = currentCard.suit;
     }
 
     private void dealStartingHands(){
@@ -105,7 +113,10 @@ public class UNO extends Game {
         for(Player player : players){
             turn(player);
 
-            if(players.size() == 1) break;
+            if(players.size() == 1){
+                playerFinished(players.get(0));
+                break;
+            }
 
             checkCurrentCard();
         }
@@ -123,6 +134,10 @@ public class UNO extends Game {
         do{
             System.out.println("\n- Current Card -");
             CardGUI.showCard(currentCard);
+            if(currentCard.suit.equals("WILD")) {
+                String ANSI_COLOR = UnoCardGUI.getAnsiCode(newColor);
+                System.out.printf("New Color: " + ANSI_COLOR + "%s" + ANSI.RESET + "\n", newColor);
+            }
 
             System.out.println("- Your hand -");
             CardGUI.showHand(activePlayer.hand.cards);
@@ -176,7 +191,7 @@ public class UNO extends Game {
     }
 
     private boolean playableCard(Card card){
-        return card.suit.equals(currentCard.suit) || card.value.equals(currentCard.value);
+        return card.suit.equals("WILD") || card.suit.equals(newColor) || card.value.equals(currentCard.value);
     }
 
     private void drawUntilPlayable(Player activePlayer){
@@ -218,18 +233,55 @@ public class UNO extends Game {
             }
         }
 
-        String input;
-        do{
-            System.out.print("choice: ");
-            input = scan.nextLine();
-        }while(!InputValidator.validateInt(input));
-
-        int choice = Integer.parseInt(input) - 1;
+        int choice = getChoice(listNum);
 
         discard(currentCard);
 
         Card newCard = currentCard = playableCards.get(choice);
         activePlayer.hand.cards.remove(newCard);
+
+        if(currentCard.suit.equals("WILD"))
+            wildCardPlayed();
+        else
+            newColor = currentCard.suit;
+    }
+
+    private void wildCardPlayed(){
+        // TODO: make show hand method and call here and in turn
+
+        System.out.println("\nWhat will the new color be?");
+
+        int listNum = 0;
+        for(String color : UNOCard.COLORS){
+            if(color.equals("WILD")) break;
+
+            String ANSI_COLOR = UnoCardGUI.getAnsiCode(color);
+            System.out.printf("%d. " + ANSI_COLOR + "%s" + ANSI.RESET + "\n", ++listNum, color);
+        }
+
+        int choice = getChoice(listNum);
+
+        newColor = switch(choice){
+            case 1 -> "RED";
+            case 2 ->  "GREEN";
+            case 3 -> "BLUE";
+            case 4 -> "YELLOW";
+            default -> throw new IllegalStateException("Unexpected value: " + choice);
+        };
+    }
+
+    private int getChoice(int max){
+        String input;
+
+        boolean validChoice;
+        do{
+            System.out.print("choice: ");
+            input = scan.nextLine();
+
+            validChoice = InputValidator.validateInt(input) && Integer.parseInt(input) >= 1 && Integer.parseInt(input) <= max;
+        }while(!validChoice);
+
+        return Integer.parseInt(input);
     }
 
     private void checkCurrentCard(){
@@ -260,8 +312,8 @@ public class UNO extends Game {
             CLI.pause();
         }
         else if(cardsLeft == 0){
-            System.out.printf("%s has used up all their cards! Only %d player%s left!\n", activePlayer.name,
-                    players.size() - 1, players.size() == 1 ? "" : "'s");
+            System.out.printf("\n%s has used up all their cards! Only %d player%s left!\n", activePlayer.name,
+                    players.size() - 1, players.size() - 1 == 1 ? "" : "'s");
             playerFinished(activePlayer);
         }
     }
@@ -272,13 +324,13 @@ public class UNO extends Game {
     }
 
     protected void displayResults(){
-        System.out.println("That's it for this game! here are the results:");
+        System.out.println("\nThat's it for this game! here are the results:");
 
         int rank = 0;
         for(Player player : ranking)
             System.out.printf("\t%d. %s\n", ++rank, player.name);
 
-        System.out.printf("\nCongratulations to %s for winning the game! You are an com.UNO master!!!!1111!!1!!!\n",
-                ranking.get(0));
+        System.out.printf("\nCongratulations to %s for winning the game! You are an UNO master!!!!1111!!1!!!\n",
+                ranking.get(0).name);
     }
 }
