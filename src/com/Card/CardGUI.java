@@ -1,8 +1,5 @@
 package com.Card;
 
-import com.UNO.UNOCard;
-import com.Utilities.ANSI;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,6 +17,10 @@ public class CardGUI {
         else
             return UnoCardGUI.getColorCard(card.suit, card.value);
 
+    }
+
+    public static void showCard(Card card){
+        System.out.println(getCard(card));
     }
 
     public static void showHand(List<Card> hand){
