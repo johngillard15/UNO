@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class CardGUI {
     public static List<String> cards = new ArrayList<>();
 
-    public static String getCard(Card card){
+    private static String getCard(Card card){
         if(card.suit.equals("WILD"))
             return UnoCardGUI.getWildCard(card.suit);
         else
