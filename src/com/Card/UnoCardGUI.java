@@ -41,9 +41,10 @@ public class UnoCardGUI {
             }
             default -> {
                 if (value.equals("6") || value.equals("9"))
-                    value = "̲" + value;
+                    MIDDLE = " ̲" + value;
+                else
+                    MIDDLE = " " + value;
                 TOP_CORRECTOR = " ";
-                MIDDLE = " " + value;
                 MID_CORRECTOR = "  ";
                 BOT_CORRECTOR = " ";
             }
