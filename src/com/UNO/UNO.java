@@ -10,6 +10,7 @@ import com.Player.Player;
 import com.Utilities.InputValidator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -34,6 +35,7 @@ public class UNO extends Game {
     private final int STARTING_CARDS = 7;
     private final int MIN_PLAYERS = 2;
     List<Player> ranking = new ArrayList<>();
+    private int currentPlayer = 0;
     private Card currentCard;
     private String newColor = "";
 
@@ -110,16 +112,14 @@ public class UNO extends Game {
     }
 
     protected void round(){
-        for(Player player : players){
-            turn(player);
+        do{
+            turn(players.get(currentPlayer));
 
-            if(players.size() == 1){
+            if(players.size() == 1)
                 playerFinished(players.get(0));
-                break;
-            }
-
-            checkCurrentCard();
-        }
+            else
+                checkCurrentCard();
+        }while(players.size() > 1);
     }
 
     protected void turn(Player activePlayer){
@@ -132,6 +132,7 @@ public class UNO extends Game {
 
         boolean turnActive = true;
         do{
+            CLI.cls();
             System.out.println("\n- Current Card -");
             CardGUI.showCard(currentCard);
             if(currentCard.suit.equals("WILD")) {
@@ -159,13 +160,7 @@ public class UNO extends Game {
         System.out.println("2. Sort hand by " + ANSI.BLUE + "Color" + ANSI.RESET);
         System.out.println("3. Sort hand by " + ANSI.PURPLE + "Value" + ANSI.RESET);
 
-        String input;
-        do{
-            System.out.print("choice: ");
-            input = scan.nextLine();
-        }while(!InputValidator.validateInt(input));
-
-        int choice = Integer.parseInt(input);
+        int choice = getChoice(3);
         switch (choice) {
             case 1 -> playCard(activePlayer);
             case 2 -> {
@@ -237,7 +232,7 @@ public class UNO extends Game {
 
         discard(currentCard);
 
-        Card newCard = currentCard = playableCards.get(choice);
+        Card newCard = currentCard = playableCards.get(choice - 1);
         activePlayer.hand.cards.remove(newCard);
 
         if(currentCard.suit.equals("WILD"))
@@ -263,7 +258,7 @@ public class UNO extends Game {
 
         newColor = switch(choice){
             case 1 -> "RED";
-            case 2 ->  "GREEN";
+            case 2 -> "GREEN";
             case 3 -> "BLUE";
             case 4 -> "YELLOW";
             default -> throw new IllegalStateException("Unexpected value: " + choice);
@@ -285,21 +280,60 @@ public class UNO extends Game {
     }
 
     private void checkCurrentCard(){
-        if(currentCard.value.equals("SKIP")){
-            System.out.println("SKIP!");
-            CLI.pause();
-        }
-        else if(currentCard.value.equals("REVERSE")){
-            System.out.println("REVERSE!");
-            CLI.pause();
-        }
-        else if(currentCard.value.equals("DRAW_TWO")){
-            System.out.println("DRAW TWO!");
-            CLI.pause();
-        }
-        else if(currentCard.value.equals("DRAW_FOUR")){
-            System.out.println("DRAW FOUR!");
-            CLI.pause();
+        int nextPlayer = (currentPlayer + 1) % players.size();
+
+        switch(currentCard.value){
+            case "SKIP" -> {
+                System.out.println("\nSKIP!");
+                System.out.printf("%s misses their turn!\n", players.get(nextPlayer).name);
+
+                if(players.size() > 2)
+                    currentPlayer = ++nextPlayer % players.size();
+
+                CLI.pause();
+            }
+            case "REVERSE" -> {
+                System.out.println("\nREVERSE!");
+                System.out.printf("%s has reversed the player order!\n", players.get(currentPlayer).name);
+
+                if(players.size() == 2){
+                    System.out.printf("Since there are only 2 players left, %s will just be skipped!",
+                            players.get(nextPlayer).name);
+                }
+                else{
+                    Player thisPlayer = players.get(currentPlayer);
+                    Collections.reverse(players);
+                    currentPlayer = players.indexOf(thisPlayer);
+
+                    currentPlayer = ++currentPlayer % players.size();
+                }
+
+                CLI.pause();
+            }
+            case "DRAW_TWO" -> {
+                System.out.println("\nDRAW TWO!");
+                System.out.printf("%s has to draw 2 cards!", players.get(nextPlayer));
+
+                for(int i = 0; i < 2; i++)
+                    draw(players.get(nextPlayer));
+
+                currentPlayer = ++nextPlayer % players.size();
+
+                CLI.pause();
+            }
+            case "DRAW_FOUR" -> {
+                System.out.println("\nDRAW FOUR!");
+                System.out.printf("%s has to draw 4 cards!", players.get(nextPlayer));
+
+                for(int i = 0; i < 4; i++)
+                    draw(players.get(nextPlayer));
+
+                currentPlayer = ++nextPlayer % players.size();
+
+                CLI.pause();
+            }
+
+            default -> currentPlayer = ++currentPlayer % players.size();
         }
     }
 
