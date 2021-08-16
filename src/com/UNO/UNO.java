@@ -125,7 +125,6 @@ public class UNO extends Game {
     protected void turn(Player activePlayer){
         String name = activePlayer.name;
 
-        CLI.cls();
         System.out.printf("- [P%d] %s%s turn -\n",
                 players.indexOf(activePlayer) + 1, name, name.charAt(name.length() - 1) == 's' ? "'" : "'s");
         CLI.pause();
@@ -164,10 +163,12 @@ public class UNO extends Game {
         switch (choice) {
             case 1 -> playCard(activePlayer);
             case 2 -> {
+                System.out.println("\nSorting by Color...");
                 activePlayer.hand.sortBySuit();
                 return true;
             }
             case 3 -> {
+                System.out.println("\nSorting by Value...");
                 activePlayer.hand.sortByValue();
                 return true;
             }
@@ -297,7 +298,7 @@ public class UNO extends Game {
                 System.out.printf("%s has reversed the player order!\n", players.get(currentPlayer).name);
 
                 if(players.size() == 2){
-                    System.out.printf("Since there are only 2 players left, %s will just be skipped!",
+                    System.out.printf("Since there are only 2 players left, %s will just be skipped!\n",
                             players.get(nextPlayer).name);
                 }
                 else{
@@ -312,7 +313,7 @@ public class UNO extends Game {
             }
             case "DRAW_TWO" -> {
                 System.out.println("\nDRAW TWO!");
-                System.out.printf("%s has to draw 2 cards!", players.get(nextPlayer));
+                System.out.printf("%s has to draw 2 cards!\n", players.get(nextPlayer).name);
 
                 for(int i = 0; i < 2; i++)
                     draw(players.get(nextPlayer));
@@ -323,7 +324,7 @@ public class UNO extends Game {
             }
             case "DRAW_FOUR" -> {
                 System.out.println("\nDRAW FOUR!");
-                System.out.printf("%s has to draw 4 cards!", players.get(nextPlayer));
+                System.out.printf("%s has to draw 4 cards!\n", players.get(nextPlayer).name);
 
                 for(int i = 0; i < 4; i++)
                     draw(players.get(nextPlayer));
@@ -349,6 +350,8 @@ public class UNO extends Game {
             System.out.printf("\n%s has used up all their cards! Only %d player%s left!\n", activePlayer.name,
                     players.size() - 1, players.size() - 1 == 1 ? "" : "'s");
             playerFinished(activePlayer);
+
+            CLI.pause();
         }
     }
 
