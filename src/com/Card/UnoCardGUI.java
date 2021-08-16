@@ -17,32 +17,27 @@ public class UnoCardGUI {
     public static String getColorCard(String color, String value){
         String ANSI_COLOR = getAnsiCode(color);
 
-        String TOP_CORRECTOR;
+        String TOP_CORRECTOR = "";
         String MIDDLE;
         String MID_CORRECTOR;
-        String BOT_CORRECTOR;
+        String BOT_CORRECTOR = "";
 
-        switch (value) {
+        // each face needs different formatting to fit within the bounds of the card
+        switch(value){
             case "SKIP" -> { // ⃠
                 value = " ⃠ ";
-                TOP_CORRECTOR = "";
                 MIDDLE = "  " + value;
                 MID_CORRECTOR = "  ";
-                BOT_CORRECTOR = "";
             }
             case "REVERSE" -> { // 🔁
                 value = "\uD83D\uDD01" + " ";
-                TOP_CORRECTOR = "";
                 MIDDLE = "   " + value;
                 MID_CORRECTOR = " ";
-                BOT_CORRECTOR = "";
             }
             case "DRAW_TWO" -> {
                 value = "+2";
-                TOP_CORRECTOR = "";
                 MIDDLE = "▮";
                 MID_CORRECTOR = "▮  ";
-                BOT_CORRECTOR = "";
             }
             default -> {
                 if (value.equals("6") || value.equals("9"))
@@ -55,15 +50,14 @@ public class UnoCardGUI {
         }
 
         String cardFace = String.format(
-                ANSI_COLOR + """
-                        ╭─────────╮
-                        │%s%s       │
-                        │         │
-                        │   %s%s  │
-                        │         │
-                        │       %s%s│
-                        ╰─────────╯
-                        """ + ANSI.RESET, value, TOP_CORRECTOR, MIDDLE, MID_CORRECTOR, BOT_CORRECTOR, value);
+                ANSI_COLOR + "╭─────────╮\n" + ANSI.RESET +
+                ANSI_COLOR + "│%s%s       │\n" + ANSI.RESET +
+                ANSI_COLOR + "│         │\n" + ANSI.RESET +
+                ANSI_COLOR + "│   %s%s  │\n" + ANSI.RESET +
+                ANSI_COLOR + "│         │\n" + ANSI.RESET +
+                ANSI_COLOR + "│       %s%s│\n" + ANSI.RESET +
+                ANSI_COLOR + "╰─────────╯" + ANSI.RESET,
+                value, TOP_CORRECTOR, MIDDLE, MID_CORRECTOR, BOT_CORRECTOR, value);
 
         return cardFace;
     }
@@ -76,15 +70,14 @@ public class UnoCardGUI {
         String D4_BOT = ANSI.YELLOW + "▮ " + ANSI.RESET + ANSI.BLACK;
 
         String WILD_CARD = String.format(
-                ANSI.BLACK + """
-                        ╭─────────╮
-                        │%s       │
-                        │    %s   │
-                        │   %s%s  │
-                        │    %s   │
-                        │       %s│
-                        ╰─────────╯
-                        """ + ANSI.RESET, CORNER, D4_TOP, D4_LEFT, D4_RIGHT, D4_BOT, CORNER);
+                ANSI.BLACK + "╭─────────╮\n" + ANSI.RESET +
+                ANSI.BLACK + "│%s       │\n" + ANSI.RESET +
+                ANSI.BLACK + "│    %s   │\n" + ANSI.RESET +
+                ANSI.BLACK + "│   %s%s  │\n" + ANSI.RESET +
+                ANSI.BLACK + "│    %s   │\n" + ANSI.RESET +
+                ANSI.BLACK + "│       %s│\n" + ANSI.RESET +
+                ANSI.BLACK + "╰─────────╯" + ANSI.RESET,
+                CORNER, D4_TOP, D4_LEFT, D4_RIGHT, D4_BOT, CORNER);
 
         return WILD_CARD;
     }
