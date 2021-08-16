@@ -66,7 +66,7 @@ public class UNO extends Game {
 
     private void dealStartingHands(){
         for(Player player : players){
-            for(int i = 0; i < 7; i++)
+            for(int i = 0; i < STARTING_CARDS; i++)
                 draw(player);
         }
     }
