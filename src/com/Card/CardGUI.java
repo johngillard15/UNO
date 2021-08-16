@@ -125,5 +125,34 @@ public class CardGUI {
                         │       %s│
                         ╰─────────╯
                         """ + ANSI.RESET, DRAW_FOUR, D4_TOP, D4_LEFT, D4_RIGHT, D4_BOT, DRAW_FOUR);
+
+        String CC_TOP = ANSI.BLUE + "▮ " + ANSI.RESET + ANSI.BLACK;
+        String CC_LEFT = ANSI.RED + "▮" + ANSI.RESET + ANSI.BLACK;
+        String CC_RIGHT = ANSI.GREEN + "▮  " + ANSI.RESET + ANSI.BLACK;
+        String CC_BOT = ANSI.YELLOW + "▮ " + ANSI.RESET + ANSI.BLACK;
+        System.out.printf(
+                ANSI.BLACK + """
+                        ╭─────────╮
+                        │         │
+                        │    %s   │
+                        │   %s%s  │
+                        │    %s   │
+                        │         │
+                        ╰─────────╯
+                        """ + ANSI.RESET, CC_TOP, CC_LEFT, CC_RIGHT, CC_BOT);
+
+        String DRAW_TWO = "+2";
+        String D2_LEFT = "▮";
+        String D2_RIGHT = "▮  ";
+        System.out.printf(
+                ANSI.RED + """
+                        ╭─────────╮
+                        │%s       │
+                        │         │
+                        │   %s%s  │
+                        │         │
+                        │       %s│
+                        ╰─────────╯
+                        """ + ANSI.RESET, DRAW_TWO, D2_LEFT, D2_RIGHT, DRAW_TWO);
     }
 }
