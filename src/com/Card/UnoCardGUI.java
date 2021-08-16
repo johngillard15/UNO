@@ -13,23 +13,57 @@ public class UnoCardGUI {
             default -> ANSI.BLACK;
         };
     }
+
     public static String getColorCard(String color, String value){
         String ANSI_COLOR = getAnsiCode(color);
 
-        String corner = value;
-        if(value.equals("6") || value.equals("9"))
-            value = "̲" + value;
+        String TOP_CORRECTOR;
+        String MIDDLE;
+        String MID_CORRECTOR;
+        String BOT_CORRECTOR;
+
+        switch (value) {
+            case "SKIP" -> { // ⃠
+                value = " ⃠ ";
+                TOP_CORRECTOR = "";
+                MIDDLE = "  " + value;
+                MID_CORRECTOR = "  ";
+                BOT_CORRECTOR = "";
+            }
+            case "REVERSE" -> { // 🔁
+                value = "\uD83D\uDD01" + " ";
+                TOP_CORRECTOR = "";
+                MIDDLE = "   " + value;
+                MID_CORRECTOR = " ";
+                BOT_CORRECTOR = "";
+            }
+            case "DRAW_TWO" -> {
+                value = "+2";
+                TOP_CORRECTOR = "";
+                MIDDLE = "▮";
+                MID_CORRECTOR = "▮  ";
+                BOT_CORRECTOR = "";
+            }
+            default -> {
+                if (value.equals("6") || value.equals("9"))
+                    value = "̲" + value;
+                TOP_CORRECTOR = " ";
+                MIDDLE = " " + value;
+                MID_CORRECTOR = "  ";
+                BOT_CORRECTOR = " ";
+            }
+        }
 
         String cardFace = String.format(
                 ANSI_COLOR + """
                         ╭─────────╮
-                        │%s        │
+                        │%s%s       │
                         │         │
-                        │    %s    │
+                        │   %s%s  │
                         │         │
-                        │        %s│
+                        │       %s%s│
                         ╰─────────╯
-                        """ + ANSI.RESET, corner, value, corner);
+                        """ + ANSI.RESET, value, TOP_CORRECTOR, MIDDLE, MID_CORRECTOR, BOT_CORRECTOR, value);
 
         return cardFace;
     }
