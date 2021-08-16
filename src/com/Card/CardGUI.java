@@ -14,17 +14,18 @@ public class CardGUI {
 
     }
 
-    public static void showCard(Card card){
+    public static String getCard(Card card){
+        if(card.suit.equals("WILD"))
+            return UnoCardGUI.getWildCard(card.suit);
+        else
+            return UnoCardGUI.getColorCard(card.suit, card.value);
 
     }
 
     public static void showHand(List<Card> hand){
         List<Scanner> scannerList = new ArrayList<>();
         for(Card card : hand){
-            if(card.suit.equals("WILD"))
-                scannerList.add(new Scanner(UnoCardGUI.getWildCard(card.suit)));
-            else
-                scannerList.add(new Scanner(UnoCardGUI.getColorCard(card.suit, card.value)));
+            scannerList.add(new Scanner(getCard(card)));
         }
 
         while(scannerList.get(0).hasNextLine()){
