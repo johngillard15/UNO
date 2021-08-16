@@ -1,5 +1,6 @@
 package com.UNO;
 
+import com.Card.CardGUI;
 import com.Utilities.CLI;
 import com.Card.Card;
 import com.Card.Deck;
@@ -84,13 +85,7 @@ public class UNO extends Game {
 
         for(Player player : players){
             System.out.println(player.name);
-            System.out.println(player.hand.cards);
-            System.out.println("Sorted by Suit:");
-            player.hand.sortBySuit();
-            System.out.println(player.hand.cards);
-            System.out.println("Sorted by Value:");
-            player.hand.sortByValue();
-            System.out.println(player.hand.cards);
+            CardGUI.showHand(player.hand.cards);
         }
 
 //        do{
