@@ -21,23 +21,23 @@ public class ANSI {
 
     public static String getCode(String color){
         return switch(color){
-            case RESET -> "\u001B[0m";
-            case BLACK -> "\u001B[30m";
-            case RED -> "\u001B[31m";
-            case GREEN -> "\u001B[32m";
-            case YELLOW -> "\u001B[33m";
-            case BLUE -> "\u001B[34m";
-            case PURPLE -> "\u001B[35m";
-            case CYAN -> "\u001B[36m";
-            case WHITE -> "\u001B[37m";
-            case BLACK_BG -> "\u001B[40m";
-            case RED_BG -> "\u001B[41m";
-            case GREEN_BG -> "\u001B[42m";
-            case YELLOW_BG -> "\u001B[43m";
-            case BLUE_BG -> "\u001B[44m";
-            case PURPLE_BG -> "\u001B[45m";
-            case CYAN_BG -> "\u001B[46m";
-            case WHITE_BG -> "\u001B[47m";
+            case RESET -> RESET;
+            case BLACK -> BLACK;
+            case RED -> RED;
+            case GREEN -> GREEN;
+            case YELLOW -> YELLOW;
+            case BLUE -> BLUE;
+            case PURPLE -> PURPLE;
+            case CYAN -> CYAN;
+            case WHITE -> WHITE;
+            case BLACK_BG -> BLACK_BG;
+            case RED_BG -> RED_BG;
+            case GREEN_BG -> GREEN_BG;
+            case YELLOW_BG -> YELLOW_BG;
+            case BLUE_BG -> BLUE_BG;
+            case PURPLE_BG -> PURPLE_BG;
+            case CYAN_BG -> CYAN_BG;
+            case WHITE_BG -> WHITE_BG;
             default -> throw new IllegalStateException("Unexpected value: " + color);
         };
     }
