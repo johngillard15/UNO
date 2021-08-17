@@ -3,19 +3,9 @@ package com.UNO;
 import com.Utilities.ANSI;
 
 public class UnoCardGUI {
-    public static String getAnsiCode(String color){
-        return switch(color){
-            case "WHITE" -> ANSI.WHITE;
-            case "RED" -> ANSI.RED;
-            case "BLUE" -> ANSI.BLUE;
-            case "GREEN" -> ANSI.GREEN;
-            case "YELLOW" -> ANSI.YELLOW;
-            default -> ANSI.BLACK;
-        };
-    }
 
     public static String getColorCard(String color, String value){
-        String ANSI_COLOR = getAnsiCode(color);
+        String ANSI_COLOR = ANSI.getCode(color);
 
         String face = value;
         String topCorrector = "";
