@@ -136,7 +136,7 @@ public class UNO extends Game {
             System.out.println("\n- Current Card -");
             CardGUI.showCard(currentCard);
             if(currentCard.suit.equals("WILD")) {
-                String ANSI_COLOR = UnoCardGUI.getAnsiCode(newColor);
+                String ANSI_COLOR = ANSI.getCode(newColor);
                 System.out.printf("New Color: " + ANSI_COLOR + "%s" + ANSI.RESET + "\n", newColor);
             }
 
@@ -226,7 +226,7 @@ public class UNO extends Game {
         int listNum = 0;
         for(Card card : activePlayer.hand.cards){
             if(playableCard(card)){
-                String ANSI_COLOR = UnoCardGUI.getAnsiCode(card.suit);
+                String ANSI_COLOR = ANSI.getCode(card.suit);
                 System.out.printf("%d. " + ANSI_COLOR + "%s" + ANSI.RESET + " %s\n", ++listNum, card.suit, card.value);
                 playableCards.add(card);
             }
@@ -254,7 +254,7 @@ public class UNO extends Game {
         for(String color : UNOCard.COLORS){
             if(color.equals("WILD")) break;
 
-            String ANSI_COLOR = UnoCardGUI.getAnsiCode(color);
+            String ANSI_COLOR = ANSI.getCode(color);
             System.out.printf("%d. " + ANSI_COLOR + "%s" + ANSI.RESET + "\n", ++listNum, color);
         }
 
