@@ -1,5 +1,12 @@
 package com.Utilities;
 
+/**
+ * <p>This class holds fields containing ANSI escape codes for colored text and backgrounds.</p>
+ * <p>The method {@link ANSI#getCode(String)} accepts the name of an escape code and will return the desired code</p>
+ *
+ * @since 15/8/2021
+ * @author John Gillard
+ */
 public class ANSI {
     public static final String RESET = "\u001B[0m";
     public static final String BLACK = "\u001B[30m";
@@ -19,8 +26,16 @@ public class ANSI {
     public static final String CYAN_BG = "\u001B[46m";
     public static final String WHITE_BG = "\u001B[47m";
 
-    public static String getCode(String color){
-        return switch(color){
+    /**
+     * <p>Returns a String containing an ANSI escape code.</p>
+     *
+     * @param code the name of the requested escape code
+     * @return a String containing the escape code
+     *
+     * @throws IllegalStateException if the requested code does not exist as a field in ANSI
+     */
+    public static String getCode(String code){
+        return switch(code){
             case "RESET" -> RESET;
             case "BLACK" -> BLACK;
             case "RED" -> RED;
@@ -38,7 +53,7 @@ public class ANSI {
             case "PURPLE_BG" -> PURPLE_BG;
             case "CYAN_BG" -> CYAN_BG;
             case "WHITE_BG" -> WHITE_BG;
-            default -> throw new IllegalStateException("Unexpected value: " + color);
+            default -> throw new IllegalStateException("Code \"" + code + "\"does not exist");
         };
     }
 }
