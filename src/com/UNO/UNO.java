@@ -114,6 +114,7 @@ public class UNO extends Game {
     protected void round(){
         do{
             turn(players.get(currentPlayer));
+            deck.shuffle();
 
             if(players.size() == 1)
                 playerFinished(players.get(0));
@@ -125,13 +126,13 @@ public class UNO extends Game {
     protected void turn(Player activePlayer){
         String name = activePlayer.name;
 
+        CLI.cls();
         System.out.printf("- [P%d] %s%s turn -\n",
                 players.indexOf(activePlayer) + 1, name, name.charAt(name.length() - 1) == 's' ? "'" : "'s");
         CLI.pause();
 
         boolean turnActive = true;
         do{
-            CLI.cls();
             System.out.println("\n- Current Card -");
             CardGUI.showCard(currentCard);
             if(currentCard.suit.equals("WILD")) {
@@ -163,11 +164,13 @@ public class UNO extends Game {
         switch (choice) {
             case 1 -> playCard(activePlayer);
             case 2 -> {
+                CLI.cls();
                 System.out.println("\nSorting by Color...");
                 activePlayer.hand.sortBySuit();
                 return true;
             }
             case 3 -> {
+                CLI.cls();
                 System.out.println("\nSorting by Value...");
                 activePlayer.hand.sortByValue();
                 return true;
