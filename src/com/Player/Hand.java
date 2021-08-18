@@ -21,7 +21,7 @@ public class Hand {
     }
 
     public void removeCard(){
-        cards.remove(0);
+        cards.remove(cards.size() - 1);
     }
 
     public void removeCard(int index){

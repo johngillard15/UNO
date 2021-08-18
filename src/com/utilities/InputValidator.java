@@ -1,4 +1,4 @@
-package com.Utilities;
+package com.utilities;
 
 /**
  * <p>This class contains methods that handle runtime exceptions involving user input, mainly involving type conversions

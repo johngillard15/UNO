@@ -1,6 +1,6 @@
 package com.UNO;
 
-import com.Utilities.ANSI;
+import com.utilities.ANSI;
 
 public class UnoCardGUI {
 

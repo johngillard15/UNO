@@ -1,4 +1,4 @@
-package com.Utilities;
+package com.utilities;
 
 /**
  * <p>This class holds fields containing ANSI escape codes for colored text and backgrounds.</p>

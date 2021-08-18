@@ -21,9 +21,8 @@ public class CardGUI {
 
     public static void showHand(List<Card> hand){
         List<Scanner> scannerList = new ArrayList<>();
-        for(Card card : hand){
+        for(Card card : hand)
             scannerList.add(new Scanner(getCard(card)));
-        }
 
         while(scannerList.get(0).hasNextLine()){
             StringBuilder line = new StringBuilder();

@@ -1,6 +1,6 @@
 package com.Game;
 
-import com.Utilities.InputValidator;
+import com.utilities.InputValidator;
 import com.Player.Player;
 
 import java.util.ArrayList;
