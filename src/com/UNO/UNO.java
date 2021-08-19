@@ -1,15 +1,16 @@
 package com.UNO;
 
 import com.Card.CardGUI;
-import com.Utilities.ANSI;
-import com.Utilities.CLI;
+import com.utilities.ANSI;
+import com.utilities.CLI;
 import com.Card.Card;
 import com.Card.Deck;
 import com.Game.Game;
 import com.Player.Player;
-import com.Utilities.InputValidator;
+import com.utilities.InputValidator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -47,6 +48,9 @@ public class UNO extends Game {
     protected void setup(int MIN_PLAYERS, int MAX_PLAYERS) {
         super.setup(MIN_PLAYERS, MAX_PLAYERS);
         createUNOCardDeck();
+
+        determinePlayerOrder();
+
         dealStartingHands();
     }
 
@@ -85,9 +89,52 @@ public class UNO extends Game {
         newColor = currentCard.suit;
     }
 
+    private void determinePlayerOrder(){
+        System.out.println("\nLet's draw to see who goes first.\n");
+
+        while(players.size() > 0){
+            draw(players.get(0));
+
+            System.out.printf("%s's card:\n", players.get(0).name);
+            CardGUI.showCard(players.get(0).hand.cards.get(0));
+            CLI.pause();
+
+            ranking.add(players.get(0));
+            players.remove(0);
+        }
+
+        players.add(ranking.get(0));
+        ranking.remove(0);
+
+        while(ranking.size() > 0){
+            Player thisPlayer = ranking.get(0);
+            Card thisCard = thisPlayer.hand.cards.get(0);
+            Player topPlayer = players.get(0);
+            Card topCard = topPlayer.hand.cards.get(0);
+
+            int thisValue = Arrays.asList(UNOCard.VALUES).indexOf(thisCard.value);
+            int topValue = Arrays.asList(UNOCard.VALUES).indexOf(topCard.value);
+            int thisSuit = Arrays.asList(UNOCard.COLORS).indexOf(thisCard.suit);
+            int topSuit = Arrays.asList(UNOCard.COLORS).indexOf(topCard.suit);
+
+            if(thisValue > topValue || (thisValue == topValue && thisSuit > topSuit))
+                players.add(0, thisPlayer);
+            else
+                players.add(thisPlayer);
+
+            ranking.remove(thisPlayer);
+        }
+
+        System.out.println("Here's the play order:");
+        int rank = 0;
+        for(Player player : players)
+            System.out.printf("\t%d. %s\n", ++rank, player.name);
+        CLI.pause();
+    }
+
     private void dealStartingHands(){
         for(Player player : players){
-            for(int i = 0; i < STARTING_CARDS; i++)
+            while(player.hand.cards.size() < STARTING_CARDS)
                 draw(player);
         }
     }
