@@ -53,7 +53,7 @@ public class ANSI {
             case "PURPLE_BG" -> PURPLE_BG;
             case "CYAN_BG" -> CYAN_BG;
             case "WHITE_BG" -> WHITE_BG;
-            default -> throw new IllegalStateException("Code \"" + code + "\"does not exist");
+            default -> throw new IllegalStateException("Code \"" + code + "\" does not exist");
         };
     }
 }

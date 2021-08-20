@@ -14,6 +14,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.utilities.ANSI.getCode;
+
 /**
  * <h1>UNO</h1>
  *
@@ -117,7 +119,7 @@ public class UNO extends Game {
             int thisSuit = Arrays.asList(UNOCard.COLORS).indexOf(thisCard.suit);
             int topSuit = Arrays.asList(UNOCard.COLORS).indexOf(topCard.suit);
 
-            if(thisValue > topValue || (thisValue == topValue && thisSuit > topSuit))
+            if(thisValue > topValue || (thisValue == topValue && thisSuit > topSuit)) // FIXME: 8/19/2021 only checks against top card
                 players.add(0, thisPlayer);
             else
                 players.add(thisPlayer);
@@ -183,7 +185,7 @@ public class UNO extends Game {
             System.out.println("\n- Current Card -");
             CardGUI.showCard(currentCard);
             if(currentCard.suit.equals("WILD")) {
-                String ANSI_COLOR = ANSI.getCode(newColor);
+                String ANSI_COLOR = getCode(newColor);
                 System.out.printf("New Color: " + ANSI_COLOR + "%s" + ANSI.RESET + "\n", newColor);
             }
 
@@ -273,7 +275,7 @@ public class UNO extends Game {
         int listNum = 0;
         for(Card card : activePlayer.hand.cards){
             if(playableCard(card)){
-                String ANSI_COLOR = ANSI.getCode(card.suit);
+                String ANSI_COLOR = card.suit.equals("WILD") ? ANSI.BLACK : getCode(card.suit);
                 System.out.printf("%d. " + ANSI_COLOR + "%s" + ANSI.RESET + " %s\n", ++listNum, card.suit, card.value);
                 playableCards.add(card);
             }
@@ -301,7 +303,7 @@ public class UNO extends Game {
         for(String color : UNOCard.COLORS){
             if(color.equals("WILD")) break;
 
-            String ANSI_COLOR = ANSI.getCode(color);
+            String ANSI_COLOR = getCode(color);
             System.out.printf("%d. " + ANSI_COLOR + "%s" + ANSI.RESET + "\n", ++listNum, color);
         }
 
