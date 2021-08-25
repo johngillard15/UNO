@@ -7,22 +7,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CardGUI {
-    private static String getCard(Card card){
-        if(card.suit.equals("WILD"))
-            return UnoCardGUI.getWildCard(card.value);
-        else
-            return UnoCardGUI.getColorCard(card.suit, card.value);
-
-    }
-
     public static void showCard(Card card){
-        System.out.println(getCard(card));
+        System.out.println(card.getCardGUI());
     }
 
     public static void showHand(List<Card> hand){
         List<Scanner> scannerList = new ArrayList<>();
         for(Card card : hand)
-            scannerList.add(new Scanner(getCard(card)));
+            scannerList.add(new Scanner(card.getCardGUI()));
 
         while(scannerList.get(0).hasNextLine()){
             StringBuilder line = new StringBuilder();
