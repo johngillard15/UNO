@@ -10,7 +10,6 @@ import com.Player.Player;
 import com.utilities.InputValidator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class UNO extends Game {
     protected Deck deck = new Deck();
     private final int STARTING_CARDS = 7;
     private final int MIN_PLAYERS = 2;
-    List<Player> ranking = new ArrayList<>();
+    private List<Player> ranking = new ArrayList<>();
     private int currentPlayer = 0;
     private Card currentCard;
     private String newColor = "";
@@ -49,6 +48,7 @@ public class UNO extends Game {
     @Override
     protected void setup(int MIN_PLAYERS, int MAX_PLAYERS) {
         super.setup(MIN_PLAYERS, MAX_PLAYERS);
+
         createUNOCardDeck();
 
         determinePlayerOrder();
@@ -92,40 +92,33 @@ public class UNO extends Game {
     }
 
     private void determinePlayerOrder(){
+        List<Card> startingOrder = new ArrayList<>();
+        for(Player player : players){
+            Card card = deck.deal();
+            startingOrder.add(card);
+            player.hand.addCard(card);
+        }
+
         System.out.println("\nLet's draw to see who goes first.\n");
 
-        while(players.size() > 0){
-            draw(players.get(0));
-
-            System.out.printf("%s's card:\n", players.get(0).name);
-            CardGUI.showCard(players.get(0).hand.cards.get(0));
+        for(Player player : players){
+            System.out.printf("%s's card:\n", player.name);
+            CardGUI.showCard(player.hand.cards.get(0));
             CLI.pause();
-
-            ranking.add(players.get(0));
-            players.remove(0);
         }
 
-        players.add(ranking.get(0));
-        ranking.remove(0);
+        startingOrder.sort(new Card.SortByValue().reversed());
 
-        while(ranking.size() > 0){
-            Player thisPlayer = ranking.get(0);
-            Card thisCard = thisPlayer.hand.cards.get(0);
-            Player topPlayer = players.get(0);
-            Card topCard = topPlayer.hand.cards.get(0);
+        ranking.addAll(players);
+        for(Player player : players){
+            Card card = player.hand.cards.get(0);
+            int newIndex = startingOrder.indexOf(card);
 
-            int thisValue = Arrays.asList(UNOCard.VALUES).indexOf(thisCard.value);
-            int topValue = Arrays.asList(UNOCard.VALUES).indexOf(topCard.value);
-            int thisSuit = Arrays.asList(UNOCard.COLORS).indexOf(thisCard.suit);
-            int topSuit = Arrays.asList(UNOCard.COLORS).indexOf(topCard.suit);
-
-            if(thisValue > topValue || (thisValue == topValue && thisSuit > topSuit)) // FIXME: 8/19/2021 only checks against top card
-                players.add(0, thisPlayer);
-            else
-                players.add(thisPlayer);
-
-            ranking.remove(thisPlayer);
+            ranking.set(newIndex, player);
         }
+
+        players.clear();
+        players.addAll(ranking);
 
         System.out.println("Here's the play order:");
         int rank = 0;
