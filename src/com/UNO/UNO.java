@@ -119,6 +119,7 @@ public class UNO extends Game {
 
         players.clear();
         players.addAll(ranking);
+        ranking.clear();
 
         System.out.println("Here's the play order:");
         int rank = 0;
