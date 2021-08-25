@@ -11,5 +11,11 @@ public class UNOCard extends Card {
         super(color, value);
     }
 
-    // maybe make new sort by suit to compare indices?
+    @Override
+    public String getCardGUI(){
+        if(suit.equals("WILD"))
+            return UnoCardGUI.getWildCard(value);
+        else
+            return UnoCardGUI.getColorCard(suit, value);
+    }
 }
