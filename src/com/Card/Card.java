@@ -15,6 +15,10 @@ public class Card {
         return new Card(suit, value);
     }
 
+    public String getCardGUI(){
+        return ""; // do something here once i make a standard deck of cards
+    }
+
     public static class SortBySuit implements Comparator<Card> {
         @Override
         public int compare(Card cardA, Card cardB){
