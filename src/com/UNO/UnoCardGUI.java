@@ -6,53 +6,55 @@ public class UnoCardGUI {
 // TODO: try to use justify instead of all these correctors
     public static String getColorCard(String color, String value){
         String ANSI_COLOR = ANSI.getCode(color);
+        String formattedCard =
+                ANSI_COLOR + "╭─────────╮\n" + ANSI.RESET +
+                ANSI_COLOR + "│%s│\n" + ANSI.RESET +
+                ANSI_COLOR + "│         │\n" + ANSI.RESET +
+                ANSI_COLOR + "│%5s│\n" + ANSI.RESET +
+                ANSI_COLOR + "│         │\n" + ANSI.RESET +
+                ANSI_COLOR + "│%9s│\n" + ANSI.RESET +
+                ANSI_COLOR + "╰─────────╯" + ANSI.RESET;
 
+        String top;
+        String mid;
+        String bot;
         String face = value;
-        String topCorrector = "";
-        String middle;
-        String midCorrector;
-        String botCorrector = "";
 
-        // each face needs different formatting to fit within the bounds of the card
         switch(value){
-            case "SKIP" -> { // ⃠
-                face = " ⃠ ";
-                middle = "  " + face;
-                midCorrector = "  ";
+            case "SKIP" -> {
+                face = " ⃠ ";// ⃠
+                top = String.format("%-10s", face);
+                mid = String.format("  %6s%3s ", face, "");
+                bot = String.format("%10s", face);
             }
-            case "REVERSE" -> { // 🔁
-                face = "\uD83D\uDD01" + " ";
-                middle = "   " + face;
-                midCorrector = " ";
+            case "REVERSE" -> {
+                face = "\uD83D\uDD01";//🔁
+                top = String.format("%-9s ", face);
+                mid = String.format("     %s%3s  ", face, "");
+                bot = String.format("%9s ", face);
             }
             case "DRAW_TWO" -> {
                 face = "+2";
-                middle = "▮▮";
-                midCorrector = "  ";
+                top = String.format("%-9s", face);
+                mid = String.format("%5s%2s  ", "▮▮", "");
+                bot = String.format("%9s", face);
             }
             default -> {
-                if (value.equals("6") || value.equals("9"))
-                    middle = " ̲" + face;
-                else
-                    middle = " " + face;
-                topCorrector = " ";
-                midCorrector = "  ";
-                botCorrector = " ";
+                if(value.equals("6") || value.equals("9")) {
+                    face = "̲" + face;
+                    top = String.format("%-10s", face);
+                    mid = String.format("%6s%4s", face, "");
+                    bot = String.format("%10s", face);
+                }
+                else {
+                    top = String.format("%-9s", face);
+                    mid = String.format("%5s%4s", face, "");
+                    bot = String.format("%9s", face);
+                }
             }
         }
 
-        String top = face + topCorrector;
-        String mid = middle + midCorrector;
-        String bot = botCorrector + face;
-
-        String cardFace = String.format(
-                ANSI_COLOR + "╭─────────╮\n" + ANSI.RESET +
-                ANSI_COLOR + "│%s       │\n" + ANSI.RESET +
-                ANSI_COLOR + "│         │\n" + ANSI.RESET +
-                ANSI_COLOR + "│   %s  │\n" + ANSI.RESET +
-                ANSI_COLOR + "│         │\n" + ANSI.RESET +
-                ANSI_COLOR + "│       %s│\n" + ANSI.RESET +
-                ANSI_COLOR + "╰─────────╯" + ANSI.RESET,
+        String cardFace = String.format(formattedCard,
                 top, mid, bot);
 
         return cardFace;
