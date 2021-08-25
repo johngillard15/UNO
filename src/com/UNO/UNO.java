@@ -33,10 +33,10 @@ import static com.utilities.ANSI.getCode;
 // TODO: do more shuffles
 
 public class UNO extends Game {
+    private static final int MIN_PLAYERS = 2;
+    private static final int STARTING_CARDS = 7;
     protected Deck deck = new Deck();
-    private final int STARTING_CARDS = 7;
-    private final int MIN_PLAYERS = 2;
-    private List<Player> ranking = new ArrayList<>();
+    private final List<Player> ranking = new ArrayList<>();
     private int currentPlayer = 0;
     private Card currentCard;
     private String newColor = "";
