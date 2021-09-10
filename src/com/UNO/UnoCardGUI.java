@@ -15,10 +15,10 @@ public class UnoCardGUI {
                 ANSI_COLOR + "│%9s│\n" + ANSI.RESET +
                 ANSI_COLOR + "╰─────────╯" + ANSI.RESET;
 
+        String face = value;
         String top;
         String mid;
         String bot;
-        String face = value;
 
         switch(value){
             case "SKIP" -> {
@@ -40,7 +40,7 @@ public class UnoCardGUI {
                 bot = String.format("%9s", face);
             }
             default -> {
-                if(value.equals("6") || value.equals("9")) {
+                if(value.equals("6") || value.equals("9")){
                     face = "̲" + face;
                     top = String.format("%-10s", face);
                     mid = String.format("%6s%4s", face, "");
