@@ -24,11 +24,6 @@ public class Card {
         public int compare(Card cardA, Card cardB){
             return cardA.suit.compareTo(cardB.suit);
         }
-
-//        @Override
-//        public Comparator<Card> reversed(){
-//            return Comparator.super.reversed();
-//        }
     }
     public static class SortByValue implements Comparator<Card> {
         @Override
