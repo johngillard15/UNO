@@ -1,4 +1,4 @@
-package com.Card;
+package com.card;
 
 import java.util.*;
 

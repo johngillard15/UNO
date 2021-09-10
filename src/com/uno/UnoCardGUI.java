@@ -1,4 +1,4 @@
-package com.UNO;
+package com.uno;
 
 import com.utilities.ANSI;
 

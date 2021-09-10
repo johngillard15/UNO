@@ -1,9 +1,8 @@
-package com.UNO;
+package com.uno;
 
-import com.Card.Card;
+import com.card.Card;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 public class UNOCard extends Card {
     public static final String[] COLORS = {"RED", "YELLOW", "GREEN", "BLUE", "WILD"};

@@ -1,12 +1,12 @@
-package com.UNO;
+package com.uno;
 
-import com.Card.CardGUI;
+import com.card.CardGUI;
 import com.utilities.ANSI;
 import com.utilities.CLI;
-import com.Card.Card;
-import com.Card.Deck;
-import com.Game.Game;
-import com.Player.Player;
+import com.card.Card;
+import com.card.Deck;
+import com.game.Game;
+import com.player.Player;
 import com.utilities.Input;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import static com.utilities.ANSI.getCode;
  *
  * @since 13/8/2021
  * @author John Gillard
- * @version 1.2.0
+ * @version 1.2.1
  */
 
 public class UNO extends Game {

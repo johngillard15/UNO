@@ -1,6 +1,4 @@
-package com.Card;
-
-import com.UNO.UnoCardGUI;
+package com.card;
 
 import java.util.ArrayList;
 import java.util.List;

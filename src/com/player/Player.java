@@ -1,4 +1,4 @@
-package com.Player;
+package com.player;
 
 public class Player {
     public String name;

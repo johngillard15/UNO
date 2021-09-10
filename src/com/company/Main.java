@@ -1,6 +1,6 @@
 package com.company;
 
-import com.UNO.UNO;
+import com.uno.UNO;
 
 public class Main {
     public static void main(String[] args) {

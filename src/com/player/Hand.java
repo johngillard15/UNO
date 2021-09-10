@@ -1,6 +1,6 @@
-package com.Player;
+package com.player;
 
-import com.Card.Card;
+import com.card.Card;
 
 import java.util.ArrayList;
 import java.util.List;
