@@ -7,7 +7,7 @@ import com.Card.Card;
 import com.Card.Deck;
 import com.Game.Game;
 import com.Player.Player;
-import com.utilities.InputValidator;
+import com.utilities.Input;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,28 +24,29 @@ import static com.utilities.ANSI.getCode;
  *
  * @since 13/8/2021
  * @author John Gillard
- * @version 1.1.1
+ * @version 1.2.0
  */
 
-// TODO: use updated Input class
-// TODO: use index in comparator
-
 public class UNO extends Game {
-    private static final int MIN_PLAYERS = 2;
-    private static final int STARTING_CARDS = 7;
-    protected Deck deck = new Deck();
+    public final int STARTING_CARDS;
+    protected final Deck deck;
     private final List<Player> ranking = new ArrayList<>();
     private int currentPlayer = 0;
     private Card currentCard;
     private String newColor = "";
 
     public UNO(){
-        setup(MIN_PLAYERS);
+        super(2);
+
+        STARTING_CARDS = 7;
+        deck = new Deck();
+
+        setup();
     }
 
     @Override
-    protected void setup(int MIN_PLAYERS, int MAX_PLAYERS) {
-        super.setup(MIN_PLAYERS, MAX_PLAYERS);
+    protected void setup() {
+        super.setup();
 
         createUNOCardDeck();
 
@@ -105,7 +106,7 @@ public class UNO extends Game {
             CLI.pause();
         }
 
-        startingOrder.sort(new Card.SortByValue().reversed());
+        startingOrder.sort(new UNOCard.SortByValue().reversed());
 
         ranking.addAll(players);
         for(Player player : players){
@@ -201,8 +202,7 @@ public class UNO extends Game {
         System.out.println("2. Sort hand by " + ANSI.BLUE + "Color" + ANSI.RESET);
         System.out.println("3. Sort hand by " + ANSI.PURPLE + "Value" + ANSI.RESET);
 
-        int choice = getChoice(3);
-        return switch (choice) {
+        return switch (Input.getInt(1, 3)) {
             case 1 -> {
                 playCard(activePlayer);
                 yield false;
@@ -210,13 +210,13 @@ public class UNO extends Game {
             case 2 -> {
                 CLI.cls();
                 System.out.println("\nSorting by Color...");
-                activePlayer.hand.sortBySuit();
+                activePlayer.hand.cards.sort(new UNOCard.SortBySuit());
                 yield true;
             }
             case 3 -> {
                 CLI.cls();
                 System.out.println("\nSorting by Value...");
-                activePlayer.hand.sortByValue();
+                activePlayer.hand.cards.sort(new UNOCard.SortByValue());
                 yield true;
             }
             default -> false;
@@ -275,11 +275,11 @@ public class UNO extends Game {
             }
         }
 
-        int choice = getChoice(listNum);
+        int choice = Input.getInt(1, listNum) - 1;
 
         discard(currentCard);
 
-        Card newCard = currentCard = playableCards.get(choice - 1);
+        Card newCard = currentCard = playableCards.get(choice);
         activePlayer.hand.cards.remove(newCard);
 
         if(currentCard.suit.equals("WILD"))
@@ -301,8 +301,7 @@ public class UNO extends Game {
             System.out.printf("%d. %s\n", ++listNum, ANSI_COLOR);
         }
 
-        int choice = getChoice(listNum);
-
+        int choice = Input.getInt(1, listNum);
         newColor = switch(choice){
             case 1 -> "RED";
             case 2 -> "GREEN";
@@ -310,20 +309,6 @@ public class UNO extends Game {
             case 4 -> "YELLOW";
             default -> throw new IllegalStateException("Unexpected color value: " + choice);
         };
-    }
-
-    private int getChoice(int max){
-        String input;
-
-        boolean validChoice;
-        do{
-            System.out.print("choice: ");
-            input = scan.nextLine();
-
-            validChoice = InputValidator.validateInt(input) && Integer.parseInt(input) >= 1 && Integer.parseInt(input) <= max;
-        }while(!validChoice);
-
-        return Integer.parseInt(input);
     }
 
     private void checkCurrentCard(){
@@ -393,7 +378,7 @@ public class UNO extends Game {
         }
         else if(cardsLeft == 0){
             System.out.printf("\n%s has used up all their cards! Only %d player%s left!\n", activePlayer.name,
-                    players.size() - 1, players.size() - 1 == 1 ? "" : "'s");
+                    players.size() - 1, players.size() - 1 == 1 ? "" : "s");
             playerFinished(activePlayer);
         }
 
@@ -414,5 +399,9 @@ public class UNO extends Game {
 
         System.out.printf("\nCongratulations to %s for winning the game! You are an UNO master!!!!1111!!1!!!\n",
                 ranking.get(0).name);
+
+        final String RADIO = "\uD83D\uDCFB";
+        final String COOL_DUDE = "ᕕ(⌐■_■)ᕗ";
+        System.out.printf("\t%s♪♬ %s\n", RADIO, COOL_DUDE);
     }
 }

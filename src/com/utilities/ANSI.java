@@ -1,30 +1,30 @@
 package com.utilities;
 
 /**
- * <p>This class holds fields containing ANSI escape codes for colored text and backgrounds.</p>
+ * <p>This interface holds fields containing ANSI escape codes for colored text and backgrounds.</p>
  * <p>The method {@link ANSI#getCode(String)} accepts the name of an escape code and will return the desired code</p>
  *
  * @since 15/8/2021
  * @author John Gillard
  */
-public class ANSI {
-    public static final String RESET = "\u001B[0m";
-    public static final String BLACK = "\u001B[30m";
-    public static final String RED = "\u001B[31m";
-    public static final String GREEN = "\u001B[32m";
-    public static final String YELLOW = "\u001B[33m";
-    public static final String BLUE = "\u001B[34m";
-    public static final String PURPLE = "\u001B[35m";
-    public static final String CYAN = "\u001B[36m";
-    public static final String WHITE = "\u001B[37m";
-    public static final String BLACK_BG = "\u001B[40m";
-    public static final String RED_BG = "\u001B[41m";
-    public static final String GREEN_BG = "\u001B[42m";
-    public static final String YELLOW_BG = "\u001B[43m";
-    public static final String BLUE_BG = "\u001B[44m";
-    public static final String PURPLE_BG = "\u001B[45m";
-    public static final String CYAN_BG = "\u001B[46m";
-    public static final String WHITE_BG = "\u001B[47m";
+public interface ANSI {
+    String RESET = "\u001B[0m";
+    String BLACK = "\u001B[30m";
+    String RED = "\u001B[31m";
+    String GREEN = "\u001B[32m";
+    String YELLOW = "\u001B[33m";
+    String BLUE = "\u001B[34m";
+    String PURPLE = "\u001B[35m";
+    String CYAN = "\u001B[36m";
+    String WHITE = "\u001B[37m";
+    String BLACK_BG = "\u001B[40m";
+    String RED_BG = "\u001B[41m";
+    String GREEN_BG = "\u001B[42m";
+    String YELLOW_BG = "\u001B[43m";
+    String BLUE_BG = "\u001B[44m";
+    String PURPLE_BG = "\u001B[45m";
+    String CYAN_BG = "\u001B[46m";
+    String WHITE_BG = "\u001B[47m";
 
     /**
      * <p>Returns a String containing an ANSI escape code.</p>
@@ -34,8 +34,8 @@ public class ANSI {
      *
      * @throws IllegalStateException if the requested code does not exist as a field in ANSI
      */
-    public static String getCode(String code){
-        return switch(code){
+    static String getCode(String code){
+        return switch(code.toUpperCase().trim()){
             case "RESET" -> RESET;
             case "BLACK" -> BLACK;
             case "RED" -> RED;
