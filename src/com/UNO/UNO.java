@@ -308,7 +308,7 @@ public class UNO extends Game {
             case 2 -> "GREEN";
             case 3 -> "BLUE";
             case 4 -> "YELLOW";
-            default -> throw new IllegalStateException("Unexpected value: " + choice);
+            default -> throw new IllegalStateException("Unexpected color value: " + choice);
         };
     }
 
