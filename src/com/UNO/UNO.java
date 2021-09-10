@@ -24,8 +24,11 @@ import static com.utilities.ANSI.getCode;
  *
  * @since 13/8/2021
  * @author John Gillard
- * @version 16/8/2021
+ * @version 1.1.1
  */
+
+// TODO: use updated Input class
+// TODO: use index in comparator
 
 public class UNO extends Game {
     private static final int MIN_PLAYERS = 2;
@@ -199,23 +202,25 @@ public class UNO extends Game {
         System.out.println("3. Sort hand by " + ANSI.PURPLE + "Value" + ANSI.RESET);
 
         int choice = getChoice(3);
-        switch (choice) {
-            case 1 -> playCard(activePlayer);
+        return switch (choice) {
+            case 1 -> {
+                playCard(activePlayer);
+                yield false;
+            }
             case 2 -> {
                 CLI.cls();
                 System.out.println("\nSorting by Color...");
                 activePlayer.hand.sortBySuit();
-                return true;
+                yield true;
             }
             case 3 -> {
                 CLI.cls();
                 System.out.println("\nSorting by Value...");
                 activePlayer.hand.sortByValue();
-                return true;
+                yield true;
             }
-        }
-
-        return false;
+            default -> false;
+        };
     }
 
     private boolean playableHand(Player activePlayer){
@@ -264,8 +269,8 @@ public class UNO extends Game {
         int listNum = 0;
         for(Card card : activePlayer.hand.cards){
             if(playableCard(card)){
-                String ANSI_COLOR = card.suit.equals("WILD") ? ANSI.BLACK : getCode(card.suit);
-                System.out.printf("%d. " + ANSI_COLOR + "%s" + ANSI.RESET + " %s\n", ++listNum, card.suit, card.value);
+                String ANSI_COLOR = (card.suit.equals("WILD") ? ANSI.BLACK : getCode(card.suit)) + card.suit + ANSI.RESET;
+                System.out.printf("%d. %s %s\n", ++listNum, ANSI_COLOR, card.value);
                 playableCards.add(card);
             }
         }
@@ -292,8 +297,8 @@ public class UNO extends Game {
         for(String color : UNOCard.COLORS){
             if(color.equals("WILD")) break;
 
-            String ANSI_COLOR = getCode(color);
-            System.out.printf("%d. " + ANSI_COLOR + "%s" + ANSI.RESET + "\n", ++listNum, color);
+            String ANSI_COLOR = getCode(color) + color + ANSI.RESET;
+            System.out.printf("%d. %s\n", ++listNum, ANSI_COLOR);
         }
 
         int choice = getChoice(listNum);
@@ -385,15 +390,14 @@ public class UNO extends Game {
         if(cardsLeft == 1){
             System.out.printf("\nUNO!\n\n" +
                     "Look out! %s has 1 card left!\n", activePlayer.name);
-            CLI.pause();
         }
         else if(cardsLeft == 0){
             System.out.printf("\n%s has used up all their cards! Only %d player%s left!\n", activePlayer.name,
                     players.size() - 1, players.size() - 1 == 1 ? "" : "'s");
             playerFinished(activePlayer);
-
-            CLI.pause();
         }
+
+        CLI.pause();
     }
 
     private void playerFinished(Player player){

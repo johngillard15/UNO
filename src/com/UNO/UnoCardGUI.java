@@ -3,7 +3,7 @@ package com.UNO;
 import com.utilities.ANSI;
 
 public class UnoCardGUI {
-// TODO: try to use justify instead of all these correctors
+
     public static String getColorCard(String color, String value){
         String ANSI_COLOR = ANSI.getCode(color);
         String formattedCard =
