@@ -27,11 +27,6 @@ import static com.utilities.ANSI.getCode;
  * @version 16/8/2021
  */
 
-// TODO: handle skips, reverse, draws, wilds
-// TODO: check for wild cards in playable method
-// TODO: implement wild card features
-// TODO: do more shuffles
-
 public class UNO extends Game {
     private static final int MIN_PLAYERS = 2;
     private static final int STARTING_CARDS = 7;
