@@ -17,20 +17,15 @@ public class CLI {
      * <p>Simply prints 40 blank lines to mimic a clear screen function.</p>
      */
     public static void cls(){
-        StringBuilder blankLines = new StringBuilder();
-        int lines = 40;
-
-        for(int i = 0; i < lines; i++)
-            blankLines.append("\n");
-
-        System.out.print(blankLines);
+        int newLines = 40;
+        System.out.print("\n".repeat(newLines));
     }
 
     /**
      * <p>Uses Scanner to wait for user input to continue program execution.</p>
      */
     public static void pause(){
-        System.out.println("Press enter to continue...\n");
+        System.out.println("Press enter to continue...");
         scan.nextLine();
     }
 }

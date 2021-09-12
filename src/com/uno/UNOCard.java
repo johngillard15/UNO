@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class UNOCard extends Card {
     public static final String[] COLORS = {"RED", "YELLOW", "GREEN", "BLUE", "WILD"};
     public static final String[] VALUES = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-            "SKIP", "REVERSE", "DRAW_TWO", "COLOR_CHANGE", "DRAW_FOUR"};
+            "SKIP", "REVERSE", "DRAW TWO", "COLOR CHANGE", "DRAW FOUR"};
 
     public UNOCard(String color, String value) {
         super(color, value);

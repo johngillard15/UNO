@@ -24,7 +24,7 @@ import static com.utilities.ANSI.getCode;
  *
  * @since 13/8/2021
  * @author John Gillard
- * @version 1.2.1
+ * @version 1.2.2
  */
 
 public class UNO extends Game {
@@ -61,7 +61,7 @@ public class UNO extends Game {
             for(String color : UNOCard.COLORS){
                 if(color.equals("WILD")) break;
                 for(String value : UNOCard.VALUES){
-                    if (value.equals("0") || value.equals("COLOR_CHANGE") || value.equals("DRAW_FOUR")) continue;
+                    if (value.equals("0") || value.equals("COLOR CHANGE") || value.equals("DRAW FOUR")) continue;
                     deck.pile.add(new UNOCard(color, value));
                 }
             }
@@ -73,8 +73,8 @@ public class UNO extends Game {
         }
         // create 4 of each wild card
         for(int i = 0; i < 4; i++){
-            deck.pile.add(new UNOCard("WILD", "COLOR_CHANGE"));
-            deck.pile.add(new UNOCard("WILD", "DRAW_FOUR"));
+            deck.pile.add(new UNOCard("WILD", "COLOR CHANGE"));
+            deck.pile.add(new UNOCard("WILD", "DRAW FOUR"));
         }
 
         deck.shuffle();
@@ -301,14 +301,8 @@ public class UNO extends Game {
             System.out.printf("%d. %s\n", ++listNum, ANSI_COLOR);
         }
 
-        int choice = Input.getInt(1, listNum);
-        newColor = switch(choice){
-            case 1 -> "RED";
-            case 2 -> "GREEN";
-            case 3 -> "BLUE";
-            case 4 -> "YELLOW";
-            default -> throw new IllegalStateException("Unexpected color value: " + choice);
-        };
+        int choice = Input.getInt(1, listNum) - 1;
+        newColor = UNOCard.COLORS[choice];
     }
 
     private void checkCurrentCard(){
@@ -342,7 +336,7 @@ public class UNO extends Game {
 
                 CLI.pause();
             }
-            case "DRAW_TWO" -> {
+            case "DRAW TWO" -> {
                 System.out.println("\nDRAW TWO!");
                 System.out.printf("%s has to draw 2 cards!\n", players.get(nextPlayer).name);
 
@@ -353,7 +347,7 @@ public class UNO extends Game {
 
                 CLI.pause();
             }
-            case "DRAW_FOUR" -> {
+            case "DRAW FOUR" -> {
                 System.out.println("\nDRAW FOUR!");
                 System.out.printf("%s has to draw 4 cards!\n", players.get(nextPlayer).name);
 

@@ -33,7 +33,7 @@ public class UnoCardGUI {
                 mid = String.format("     %s%3s  ", face, "");
                 bot = String.format("%9s ", face);
             }
-            case "DRAW_TWO" -> {
+            case "DRAW TWO" -> {
                 face = "+2";
                 top = String.format("%-9s", face);
                 mid = String.format("%5s%2s  ", "▮▮", "");
@@ -61,7 +61,7 @@ public class UnoCardGUI {
     }
 
     public static String getWildCard(String value){
-        String CORNER = ANSI.WHITE + (value.equals("DRAW_FOUR") ? "+4" : "  ") + ANSI.RESET + ANSI.BLACK;
+        String CORNER = ANSI.WHITE + (value.equals("DRAW FOUR") ? "+4" : "  ") + ANSI.RESET + ANSI.BLACK;
         String D4_TOP = ANSI.BLUE + "▮ " + ANSI.RESET + ANSI.BLACK;
         String D4_LEFT = ANSI.RED + "▮" + ANSI.RESET + ANSI.BLACK;
         String D4_RIGHT = ANSI.GREEN + "▮  " + ANSI.RESET + ANSI.BLACK;
