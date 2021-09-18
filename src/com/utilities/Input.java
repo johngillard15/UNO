@@ -63,7 +63,7 @@ public class Input {
                     checkInt(input) && (Integer.parseInt(input) >= MIN && Integer.parseInt(input) <= MAX);
 
             if(!checkInt(input))
-                System.out.printf("\"%s\" is not a valid number value. Please try again\n", input);
+                System.out.printf("\"%s\" is not a valid number value. Please try again.\n", input);
             else if(MIN != Integer.MIN_VALUE && !(Integer.parseInt(input) >= MIN))
                 System.out.println("Value must be greater than or equal to " + MIN);
             else if(MAX != Integer.MAX_VALUE && !(Integer.parseInt(input) <= MAX))

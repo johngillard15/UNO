@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @since 13/8/2021
  * @author John
- * @version 1.1.0
+ * @version 1.1.1
  */
 
 public abstract class Game {
@@ -51,7 +51,7 @@ public abstract class Game {
     protected int getPlayerCount(){
         System.out.println("How many players will there be?");
         System.out.print("players ");
-        return MAX_PLAYERS == -1 ? Input.getInt(MIN_PLAYERS) : Input.getInt(MAX_PLAYERS, MAX_PLAYERS);
+        return MAX_PLAYERS == -1 ? Input.getInt(MIN_PLAYERS) : Input.getInt(MIN_PLAYERS, MAX_PLAYERS);
     }
 
     public abstract void play();

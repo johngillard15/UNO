@@ -24,7 +24,7 @@ import static com.utilities.ANSI.getCode;
  *
  * @since 13/8/2021
  * @author John Gillard
- * @version 1.2.2
+ * @version 1.2.3
  */
 
 public class UNO extends Game {
@@ -80,14 +80,10 @@ public class UNO extends Game {
         deck.shuffle();
 
         currentCard = deck.deal();
-        if(currentCard.suit.equals("WILD")){
-            do{
-                discard(currentCard);
-                currentCard = deck.deal();
-            }while(!currentCard.suit.equals("WILD"));
-        }
-
-        newColor = currentCard.suit;
+        if(currentCard.suit.equals("WILD"))
+            newColor = UNOCard.COLORS[(int) (Math.random() * 4)];
+        else
+            newColor = currentCard.suit;
     }
 
     private void determinePlayerOrder(){
