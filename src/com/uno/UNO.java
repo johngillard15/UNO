@@ -24,7 +24,7 @@ import static com.utilities.ANSI.getCode;
  *
  * @since 13/8/2021
  * @author John Gillard
- * @version 1.2.3
+ * @version 1.2.4
  */
 
 public class UNO extends Game {
@@ -181,12 +181,10 @@ public class UNO extends Game {
             System.out.println("- Your hand -");
             CardGUI.showHand(activePlayer.hand.cards);
 
-            if(!playableHand(activePlayer)) {
+            if(!playableHand(activePlayer))
                 drawUntilPlayable(activePlayer);
-                continue;
-            }
-
-            turnActive = playerOptions(activePlayer);
+            else
+                turnActive = playerOptions(activePlayer);
         }while(turnActive);
 
         checkUNO(activePlayer);
@@ -235,9 +233,10 @@ public class UNO extends Game {
     private void drawUntilPlayable(Player activePlayer){
         List<Card> theseCards = activePlayer.hand.cards;
 
-        System.out.println("\nYour current hand cannot match the current card.\n" +
-                "You need to draw until you get a playable card.");
+        System.out.println("\nYour current hand cannot match the current card." +
+                "\nYou need to draw until you get a playable card.");
 
+        boolean canUseCard;
         do{
             System.out.println("\nDrawing card...");
             CLI.pause();
@@ -248,13 +247,14 @@ public class UNO extends Game {
             Card newCard = theseCards.get(theseCards.size() - 1);
             CardGUI.showCard(newCard);
 
-            if(playableCard(newCard)){
+            canUseCard = playableCard(newCard);
+            if(canUseCard){
                 System.out.println("Nice! Now back to the game.");
                 CLI.pause();
             }
             else
                 System.out.println("Nope. Try again.");
-        }while(!playableHand(activePlayer));
+        }while(!canUseCard);
     }
 
     private void playCard(Player activePlayer){
