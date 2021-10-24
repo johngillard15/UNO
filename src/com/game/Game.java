@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @since 13/8/2021
  * @author John
- * @version 1.1.1
+ * @version 1.3.0
  */
 
 public abstract class Game {
@@ -34,10 +34,11 @@ public abstract class Game {
         this.MAX_PLAYERS = MAX_PLAYERS;
     }
 
-    protected void setup(){
-        addPlayers(getPlayerCount());
+    protected void addPlayers(){
+        System.out.println("How many players will there be?");
+        System.out.print("players ");
+        addPlayers(MAX_PLAYERS == -1 ? Input.getInt(MIN_PLAYERS) : Input.getInt(MIN_PLAYERS, MAX_PLAYERS));
     }
-
     protected void addPlayers(int numPlayers){
         do{
             System.out.printf("\nPlayer %d, what is your name?\n", players.size() + 1);
@@ -46,12 +47,6 @@ public abstract class Game {
 
             players.add(Player.addPlayer(name));
         }while(players.size() < numPlayers);
-    }
-
-    protected int getPlayerCount(){
-        System.out.println("How many players will there be?");
-        System.out.print("players ");
-        return MAX_PLAYERS == -1 ? Input.getInt(MIN_PLAYERS) : Input.getInt(MIN_PLAYERS, MAX_PLAYERS);
     }
 
     public abstract void play();

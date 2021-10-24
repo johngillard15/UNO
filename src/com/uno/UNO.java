@@ -24,7 +24,7 @@ import static com.utilities.ANSI.getCode;
  *
  * @since 13/8/2021
  * @author John Gillard
- * @version 1.2.4
+ * @version 1.2.5
  */
 
 public class UNO extends Game {
@@ -44,9 +44,8 @@ public class UNO extends Game {
         setup();
     }
 
-    @Override
     protected void setup() {
-        super.setup();
+        addPlayers();
 
         createUNOCardDeck();
 
